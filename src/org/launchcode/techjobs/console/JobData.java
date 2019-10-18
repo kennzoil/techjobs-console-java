@@ -55,6 +55,36 @@ public class JobData {
     }
 
     /**
+     * No duplicate jobs
+     * DO NOT call findByColumnAndValue
+     * Allow for new columns to be searched once added
+     */
+
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        // Calls printJobs
+        // Does not duplicate job listings
+        // Does not call findByColumnAndValue
+        // Allows for new columns to be searched once added
+
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> jobData : allJobs) {
+            for (String keyName : jobData.keySet()) {
+                String valueName = jobData.get(keyName);
+                if (valueName.equalsIgnoreCase(value)) {
+                    jobs.add(jobData);
+                }
+            }
+        }
+
+        return jobs;
+
+    }
+
+    /**
      * Returns results of search the jobs data by key/value, using
      * inclusion of the search term.
      *
